@@ -1,11 +1,10 @@
-
 'use server';
 /**
  * @fileOverview A Genkit flow for generating project images.
  */
 
 import {z} from 'zod';
-import {GoogleGenerativeAI} from '@google-ai/generativelanguage';
+import * as GoogleGenerativeAI from '@google-ai/generativelanguage';
 
 const GenerateProjectImageInputSchema = z.object({
   title: z.string().describe('The title of the project.'),
@@ -39,7 +38,7 @@ export async function generateProjectImage(
     return {imageUrl: `https://placehold.co/600x400.png`};
   }
 
-  const genAI = new GoogleGenerativeAI(apiKey);
+  const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: 'gemini-1.5-flash-latest',
   });
