@@ -2,7 +2,9 @@
 // If you want to change the model, please do so in the flow file.
 'use server';
 
-import {genkit, GenerationCommonConfig, registerPlugin} from 'genkit';
+import * as Genkit from 'genkit';
+console.log(Genkit);
+
 import {googleAI, GoogleAIGenerativeAIModel} from '@google-ai/generativelanguage';
 import {GoogleAuth} from 'google-auth-library';
 
