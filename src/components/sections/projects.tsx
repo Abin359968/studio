@@ -16,6 +16,7 @@ import { ExternalLink, Bot } from "lucide-react";
 import Link from "next/link";
 import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 const projectsData = [
   {
@@ -47,7 +48,7 @@ const projectsData = [
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], index: number }) => {
+const ProjectCard = ({ project, className, index }: { project: (typeof projectsData)[0], className?: string, index: number }) => {
   const [imageUrl, setImageUrl] = React.useState<string | null>(project.staticImageUrl || null);
   const [isLoading, setIsLoading] = React.useState(!project.staticImageUrl);
   const isStatic = !!project.staticImageUrl;
@@ -73,7 +74,10 @@ const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], in
 
   return (
     <Card
-      className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
+      className={cn(
+        "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up",
+        className
+      )}
       style={{ animationDelay: `${index * 150}ms` }}
     >
       <div className="aspect-video overflow-hidden">
@@ -135,9 +139,16 @@ export default function Projects() {
             A selection of my work in game and interactive media development.
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
-            <ProjectCard key={project.title} project={project as any} index={index} />
+            <ProjectCard 
+              key={project.title} 
+              project={project as any} 
+              index={index} 
+              className={cn({
+                'lg:col-span-2': index === projectsData.length - 1 && projectsData.length % 2 !== 0,
+              })}
+            />
           ))}
         </div>
       </div>
