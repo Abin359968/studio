@@ -9,45 +9,45 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 const projects = [
   {
-    title: "Project Alpha",
-    description: "An immersive 3D open-world adventure game built with Unity.",
+    title: "Project Alpha: The Lost Kingdom",
+    description:
+      "An immersive 3D open-world adventure where players explore ancient ruins and battle mythical creatures. Features a dynamic weather system and advanced enemy AI.",
     image: "https://placehold.co/600x400.png",
     imageHint: "fantasy game",
-    tags: ["Unity", "3D", "C#", "Photon"],
+    tags: ["Unity", "3D", "C#", "Photon", "World-Building"],
     liveUrl: "#",
-    githubUrl: "#",
   },
   {
-    title: "AR Experience",
-    description: "An augmented reality application for interactive product visualization.",
+    title: "AR-Retail Experience",
+    description:
+      "An augmented reality application for a leading furniture brand that allows users to visualize products in their own space before buying, boosting sales conversion by 30%.",
     image: "https://placehold.co/600x400.png",
     imageHint: "sci-fi interface",
-    tags: ["Unity", "ARCore", "Vuforia"],
+    tags: ["Unity", "ARCore", "Vuforia", "Mobile"],
     liveUrl: "#",
-    githubUrl: "#",
   },
   {
-    title: "VR Simulation",
-    description: "A virtual reality training simulation for complex industrial tasks.",
+    title: "VR Industrial Safety Simulation",
+    description:
+      "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
     image: "https://placehold.co/600x400.png",
     imageHint: "virtual reality",
-    tags: ["Unity", "VR", "Oculus SDK"],
+    tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
-    githubUrl: "#",
   },
   {
-    title: "Pixel Platformer",
-    description: "A classic 2D platformer with modern mechanics and a retro pixel art style.",
+    title: "Pixel Raiders",
+    description:
+      "A fast-paced 2D platformer with procedurally generated levels, modern combat mechanics, and a charming retro pixel art style. Optimized for mobile and desktop.",
     image: "https://placehold.co/600x400.png",
     imageHint: "mobile game",
-    tags: ["Unity", "2D", "Mobile", "C#"],
+    tags: ["Unity", "2D", "Mobile", "C#", "Pixel Art"],
     liveUrl: "#",
-    githubUrl: "#",
   },
 ];
 
@@ -65,13 +65,15 @@ export default function Projects() {
         </div>
         <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
           {projects.map((project, index) => (
-            <Card 
-              key={project.title} 
+            <Card
+              key={project.title}
               className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <CardHeader>
-                <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
+                <CardTitle className="font-headline text-2xl">
+                  {project.title}
+                </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col gap-4">
                 <div className="aspect-video overflow-hidden rounded-lg border">
@@ -84,25 +86,24 @@ export default function Projects() {
                     data-ai-hint={project.imageHint}
                   />
                 </div>
-                <CardDescription className="flex-grow">{project.description}</CardDescription>
+                <CardDescription className="flex-grow">
+                  {project.description}
+                </CardDescription>
                 <div className="mt-2 flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                        <Badge key={tag} variant="secondary">{tag}</Badge>
-                    ))}
+                  {project.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
               </CardContent>
               <CardFooter>
                 <div className="flex justify-end w-full gap-2">
-                    <Button variant="outline" asChild>
-                        <Link href={project.githubUrl} target="_blank">
-                            <Github className="mr-2 h-4 w-4" /> Code
-                        </Link>
-                    </Button>
-                    <Button asChild>
-                        <Link href={project.liveUrl} target="_blank">
-                            <ExternalLink className="mr-2 h-4 w-4" /> Demo
-                        </Link>
-                    </Button>
+                  <Button asChild>
+                    <Link href={project.liveUrl} target="_blank">
+                      <ExternalLink className="mr-2 h-4 w-4" /> Demo
+                    </Link>
+                  </Button>
                 </div>
               </CardFooter>
             </Card>

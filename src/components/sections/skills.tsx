@@ -1,37 +1,36 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Box, CodeXml, Camera, Gamepad2, MonitorSmartphone, Bot } from "lucide-react";
 
 const skills = [
   {
     name: "Unity Development",
-    level: 95,
-    icon: <Box className="h-8 w-8 text-accent" />,
+    description: "Core engine mechanics, physics, and asset pipeline.",
+    icon: <Box className="h-10 w-10 text-accent" />,
   },
   {
     name: "C# Programming",
-    level: 90,
-    icon: <CodeXml className="h-8 w-8 text-accent" />,
+    description: "Scripting gameplay, UI, and editor tools.",
+    icon: <CodeXml className="h-10 w-10 text-accent" />,
   },
   {
     name: "AR Technology",
-    level: 85,
-    icon: <Camera className="h-8 w-8 text-accent" />,
+    description: "ARCore, ARKit, and Vuforia for immersive experiences.",
+    icon: <Camera className="h-10 w-10 text-accent" />,
   },
   {
     name: "VR Technology",
-    level: 80,
-    icon: <Gamepad2 className="h-8 w-8 text-accent" />,
+    description: "Oculus SDK, SteamVR, and interaction design.",
+    icon: <Gamepad2 className="h-10 w-10 text-accent" />,
   },
   {
     name: "2D & 3D Game Dev",
-    level: 90,
-    icon: <MonitorSmartphone className="h-8 w-8 text-accent" />,
+    description: "From pixel art platformers to vast 3D worlds.",
+    icon: <MonitorSmartphone className="h-10 w-10 text-accent" />,
   },
   {
-    name: "Cutting-Edge Tech",
-    level: 88,
-    icon: <Bot className="h-8 w-8 text-accent" />,
+    name: "Emerging Tech",
+    description: "AI integration, procedural generation, and more.",
+    icon: <Bot className="h-10 w-10 text-accent" />,
   },
 ];
 
@@ -47,18 +46,15 @@ export default function Skills() {
             A versatile skill set for creating modern, immersive digital experiences.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
           {skills.map((skill) => (
-            <Card key={skill.name}>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {skill.name}
-                </CardTitle>
+            <Card key={skill.name} className="flex flex-col items-center text-center p-6 transition-all duration-300 hover:bg-secondary/50 hover:-translate-y-1">
+              <CardHeader className="p-0 mb-4">
                 {skill.icon}
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{skill.level}%</div>
-                <Progress value={skill.level} className="w-full mt-2" />
+              <CardContent className="p-0 flex-grow">
+                <CardTitle className="text-xl font-headline mb-2">{skill.name}</CardTitle>
+                <p className="text-sm text-muted-foreground">{skill.description}</p>
               </CardContent>
             </Card>
           ))}

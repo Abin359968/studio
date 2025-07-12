@@ -25,15 +25,19 @@ export default function About() {
               About Me
             </h2>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Dynamic and self-motivated Game Developer with a passion for
-              utilizing cutting-edge technologies to solve digital challenges. A
-              quick learner with strong critical thinking abilities, adept at
-              mastering new concepts independently.
+              I am a dynamic and self-motivated Game Developer with a profound
+              passion for leveraging cutting-edge technologies to bring creative
+              visions to life. As a quick learner with strong critical-thinking
+              abilities, I thrive on mastering new concepts and pushing the
+              boundaries of digital interaction.
             </p>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Specializing in Unity development for 2D and 3D games, with
-              expertise in AR and VR technologies. Dedicated to delivering
-              innovative solutions and immersive experiences.
+              My journey in game development is driven by a desire to create
+              unforgettable experiences. I specialize in the Unity engine for
+              both 2D and 3D games, and I have a deep expertise in creating
+              immersive AR and VR applications. From conceptualization to
+              deployment, I am dedicated to delivering polished, innovative, and
+              deeply engaging solutions.
             </p>
           </div>
         </div>
