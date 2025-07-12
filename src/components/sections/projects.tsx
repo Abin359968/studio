@@ -25,7 +25,7 @@ const projectsData = [
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
     imageHint: "virtual reality fire safety",
-    staticImageUrl: "/images/fire_safety.png",
+    staticImageUrl: "/fire_safety.png",
   },
   {
     title: "AR Building Simulation",
