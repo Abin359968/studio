@@ -124,11 +124,6 @@ const ProjectCard = ({ project, className, index }: { project: (typeof projectsD
                  </>
                )}
             </div>
-            <Button asChild>
-                <Link href={project.liveUrl} target="_blank">
-                <ExternalLink className="mr-2 h-4 w-4" /> Demo
-                </Link>
-            </Button>
         </div>
       </CardFooter>
     </Card>
