@@ -61,8 +61,20 @@ export const googleAI = genkitPlugin(
               throw new Error('No response from model');
             }
             
+            const candidates = response.candidates?.map(c => {
+              const fileData = c.content.parts[0].fileData;
+              if (fileData) {
+                return {
+                  media: {
+                    url: `data:${fileData.mimeType};base64,${fileData.fileUri}`,
+                  },
+                };
+              }
+              return {};
+            }) as GenerateResponse['candidates'];
+            
             return {
-              candidates: response.candidates || [],
+              candidates,
               usage: {},
             };
           },
