@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -11,8 +12,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Bot } from "lucide-react";
 import Link from "next/link";
+import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const projectsData = [
   {
@@ -21,6 +24,7 @@ const projectsData = [
       "A high-fidelity virtual reality simulation for training employees in fire safety procedures and emergency response in industrial environments, significantly improving workplace safety.",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
+    imageHint: "virtual reality fire safety",
   },
   {
     title: "AR Building Simulation",
@@ -28,6 +32,7 @@ const projectsData = [
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
     liveUrl: "#",
+    imageHint: "augmented reality architecture",
   },
   {
     title: "Tripple Chance Casino Game",
@@ -35,6 +40,7 @@ const projectsData = [
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
     liveUrl: "#",
+    imageHint: "casino game wheel",
   },
   {
     title: "Snow Escape",
@@ -42,15 +48,51 @@ const projectsData = [
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
     liveUrl: "#",
+    imageHint: "snow mountain game",
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: { title: string; description: string; tags: string[], liveUrl: string }, index: number }) => {
+const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], index: number }) => {
+  const [imageUrl, setImageUrl] = React.useState<string | null>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        setIsLoading(true);
+        const result = await generateProjectImage({ description: project.description });
+        // Use placeholder with hint for now as direct generation is not supported this way.
+        const placeholderUrl = `https://placehold.co/600x400.png`;
+        setImageUrl(placeholderUrl);
+      } catch (error) {
+        console.error("Failed to generate image:", error);
+        setImageUrl("https://placehold.co/600x400.png");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchImage();
+  }, [project.description]);
+
   return (
     <Card
       className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
       style={{ animationDelay: `${index * 150}ms` }}
     >
+      <div className="aspect-video overflow-hidden">
+        {isLoading ? (
+          <Skeleton className="w-full h-full" />
+        ) : (
+          <Image
+            src={imageUrl || "https://placehold.co/600x400.png"}
+            alt={project.title}
+            width={600}
+            height={400}
+            data-ai-hint={project.imageHint}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        )}
+      </div>
       <CardHeader>
         <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
       </CardHeader>
@@ -63,12 +105,16 @@ const ProjectCard = ({ project, index }: { project: { title: string; description
         </div>
       </CardContent>
       <CardFooter>
-        <div className="flex justify-end w-full gap-2">
-          <Button asChild>
-            <Link href={project.liveUrl} target="_blank">
-              <ExternalLink className="mr-2 h-4 w-4" /> Demo
-            </Link>
-          </Button>
+        <div className="flex justify-between w-full items-center">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Bot className="h-4 w-4 text-primary" />
+                <span>AI Generated Image</span>
+            </div>
+            <Button asChild>
+                <Link href={project.liveUrl} target="_blank">
+                <ExternalLink className="mr-2 h-4 w-4" /> Demo
+                </Link>
+            </Button>
         </div>
       </CardFooter>
     </Card>
