@@ -46,6 +46,14 @@ const projectsData = [
     imageHint: "casino game wheel",
     staticImageUrl: "/Third.jpg",
   },
+  {
+    title: "New VR Game (Coming Soon)",
+    description:
+      "An exciting new virtual reality game currently in development. Stay tuned for more details on this upcoming immersive experience.",
+    tags: ["Unity", "VR", "Development"],
+    liveUrl: "#",
+    imageHint: "virtual reality gaming",
+  },
 ];
 
 const ProjectCard = ({ project, className, index }: { project: (typeof projectsData)[0], className?: string, index: number }) => {
@@ -144,10 +152,7 @@ export default function Projects() {
             <ProjectCard 
               key={project.title} 
               project={project as any} 
-              index={index} 
-              className={cn({
-                'lg:col-span-2': index === projectsData.length - 1 && projectsData.length % 2 !== 0,
-              })}
+              index={index}
             />
           ))}
         </div>
