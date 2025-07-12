@@ -34,7 +34,7 @@ const projectsData = [
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
     liveUrl: "#",
     imageHint: "augmented reality architecture",
-    staticImageUrl: "/Ar_Building.JPG",
+    staticImageUrl: "/Ar_Building.jpg",
   },
   {
     title: "Tripple Chance Casino Game",
