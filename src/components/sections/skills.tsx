@@ -1,42 +1,32 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Box, CodeXml, Camera, Gamepad2, MonitorSmartphone, Bot } from "lucide-react";
+import { Gamepad2, View, Code, BrainCircuit } from "lucide-react";
 
-const skills = [
+const skillCategories = [
   {
-    name: "Unity Development",
-    description: "Expertise in core engine mechanics, physics, shaders, and the end-to-end asset pipeline for 2D & 3D projects.",
-    icon: <Box className="h-10 w-10 text-accent" />,
+    title: "Game Development",
+    icon: <Gamepad2 className="h-8 w-8 text-primary" />,
+    skills: ["Unity Engine (2D/3D)", "C# Scripting", "Gameplay Systems", "Physics & Shaders", "UI/UX Design", "Optimization"]
   },
   {
-    name: "C# Programming",
-    description: "Advanced C# scripting for gameplay systems, complex UI, editor extensions, and performance optimization.",
-    icon: <CodeXml className="h-10 w-10 text-accent" />,
+    title: "AR/VR Technologies",
+    icon: <View className="h-8 w-8 text-primary" />,
+    skills: ["ARCore & ARKit", "Vuforia", "Oculus SDK (Meta Quest)", "SteamVR", "Interaction Design", "Immersive Experiences"]
   },
   {
-    name: "AR Technology",
-    description: "Developing immersive augmented reality applications using ARCore, ARKit, and Vuforia for mobile platforms.",
-    icon: <Camera className="h-10 w-10 text-accent" />,
+    title: "Core Technologies",
+    icon: <Code className="h-8 w-8 text-primary" />,
+    skills: ["Version Control (Git)", "Agile Methodologies", "Photon Networking", "REST APIs", "Mobile Deployment"]
   },
   {
-    name: "VR Technology",
-    description: "Building high-fidelity virtual reality experiences with the Oculus SDK and SteamVR, focusing on intuitive interaction design.",
-    icon: <Gamepad2 className="h-10 w-10 text-accent" />,
-  },
-  {
-    name: "2D & 3D Game Dev",
-    description: "Full-cycle development capabilities, from crafting pixel-perfect 2D platformers to building expansive 3D worlds.",
-    icon: <MonitorSmartphone className="h-10 w-10 text-accent" />,
-  },
-  {
-    name: "Emerging Tech",
-    description: "Integrating next-gen features like generative AI for dynamic content, procedural generation, and intelligent NPCs.",
-    icon: <Bot className="h-10 w-10 text-accent" />,
-  },
-];
+    title: "Emerging Tech",
+    icon: <BrainCircuit className="h-8 w-8 text-primary" />,
+    skills: ["Generative AI", "Procedural Generation", "Intelligent NPCs", "Machine Learning Concepts"]
+  }
+]
 
 export default function Skills() {
   return (
-    <section id="skills" className="w-full py-12 md:py-24 lg:py-32">
+    <section id="skills" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
@@ -46,15 +36,24 @@ export default function Skills() {
             A versatile skill set for creating modern, immersive digital experiences. I combine technical proficiency with a creative vision to build the next generation of interactive entertainment.
           </p>
         </div>
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {skills.map((skill) => (
-            <Card key={skill.name} className="flex flex-col items-center text-center p-6 transition-all duration-300 hover:bg-secondary/50 hover:-translate-y-1">
-              <CardHeader className="p-0 mb-4">
-                {skill.icon}
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
+          {skillCategories.map((category) => (
+            <Card key={category.title} className="p-6 transition-all duration-300 hover:bg-card/80 hover:-translate-y-1 hover:shadow-primary/20 hover:shadow-lg">
+              <CardHeader className="flex flex-row items-center gap-4 p-0 pb-4">
+                <div className="bg-primary/10 p-3 rounded-lg">
+                   {category.icon}
+                </div>
+                <CardTitle className="text-2xl font-headline">{category.title}</CardTitle>
               </CardHeader>
-              <CardContent className="p-0 flex-grow">
-                <CardTitle className="text-xl font-headline mb-2">{skill.name}</CardTitle>
-                <p className="text-sm text-muted-foreground">{skill.description}</p>
+              <CardContent className="p-0">
+                <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-muted-foreground">
+                  {category.skills.map(skill => (
+                    <li key={skill} className="flex items-center gap-2">
+                       <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+                       <span>{skill}</span>
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           ))}
