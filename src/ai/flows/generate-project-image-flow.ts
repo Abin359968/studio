@@ -1,8 +1,8 @@
+
 'use server';
 /**
  * @fileOverview A Genkit flow for generating project images.
  */
-
 import {z} from 'zod';
 import * as GoogleGenerativeAI from '@google-ai/generativelanguage';
 
@@ -37,13 +37,12 @@ export async function generateProjectImage(
     console.warn('GOOGLE_API_KEY not found. Returning placeholder image.');
     return {imageUrl: `https://placehold.co/600x400.png`};
   }
-
-  const genAI = new GoogleGenerativeAI.GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash-latest',
-  });
-
+  
   try {
+    const genAI = new (GoogleGenerativeAI as any).default(apiKey);
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-1.5-flash-latest',
+    });
     const result = await model.generateContent(prompt);
     // This is a placeholder for real image generation.
     // We'll use the title to make the placeholder unique.
