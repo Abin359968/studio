@@ -31,7 +31,7 @@ const projectsData = [
   {
     title: "AR Building Simulation",
     description:
-      "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
+      "An AR application that scans a notice and then shows a preview building model on the notice. It's useful to know about the building without visiting the site.",
     tags: ["Unity", "ARCore", "ARKit"],
     liveUrl: "#",
     imageHint: "augmented reality architecture",
