@@ -7,20 +7,20 @@
 import {z} from 'zod';
 import {GoogleGenerativeAI} from '@google-ai/generativelanguage';
 
-export const GenerateProjectImageInputSchema = z.object({
+const GenerateProjectImageInputSchema = z.object({
   title: z.string().describe('The title of the project.'),
   description: z.string().describe('A short description of the project.'),
 });
 
-export type GenerateProjectImageInput = z.infer<
+type GenerateProjectImageInput = z.infer<
   typeof GenerateProjectImageInputSchema
 >;
 
-export const GenerateProjectImageOutputSchema = z.object({
+const GenerateProjectImageOutputSchema = z.object({
   imageUrl: z.string().describe('The data URI of the generated image.'),
 });
 
-export type GenerateProjectImageOutput = z.infer<
+type GenerateProjectImageOutput = z.infer<
   typeof GenerateProjectImageOutputSchema
 >;
 
@@ -36,20 +36,18 @@ export async function generateProjectImage(
 
   if (!apiKey) {
     console.warn('GOOGLE_API_KEY not found. Returning placeholder image.');
-    return {imageUrl: 'https://placehold.co/600x400.png'};
+    return {imageUrl: `https://placehold.co/600x400.png`};
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash-latest', // This is a text model, using it as a placeholder for the logic
+    model: 'gemini-1.5-flash-latest',
   });
 
   try {
-    // This part is a stand-in for a real image generation call.
-    // The current text-based model won't return an image, so we'll simulate a success
-    // by returning a placeholder. If a proper image generation model were available and stable,
-    // the response handling would be different.
-    // const result = await model.generateContent(prompt);
+    const result = await model.generateContent(prompt);
+    // This is a placeholder for real image generation.
+    // We'll use the title to make the placeholder unique.
     const imageUrl = `https://placehold.co/600x400.png?text=${encodeURIComponent(title)}`;
     return {imageUrl};
   } catch (error) {
