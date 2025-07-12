@@ -11,14 +11,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { generateImage } from "@/ai/flows/generate-image-flow";
 
 const projects = [
   {
     title: "VR Industrial Safety Simulation",
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "virtual reality industrial",
+    imagePrompt: "A futuristic VR training simulation showing a factory worker learning to handle a fire emergency. The scene should be realistic with visible UI elements of the VR interface, displaying safety alerts and instructions. The environment should be a clean, modern industrial setting.",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
   },
@@ -51,6 +51,41 @@ const projects = [
   },
 ];
 
+
+function ProjectImage({ project }: { project: (typeof projects)[0] }) {
+  const [imageUrl, setImageUrl] = React.useState(project.image);
+  const [loading, setLoading] = React.useState(!project.image);
+
+  React.useEffect(() => {
+    if (project.imagePrompt && !project.image) {
+      generateImage({ prompt: project.imagePrompt })
+        .then((response) => {
+          if (response.imageUrl) {
+            setImageUrl(response.imageUrl);
+          }
+        })
+        .finally(() => setLoading(false));
+    }
+  }, [project.imagePrompt, project.image]);
+
+  return (
+    <div className="aspect-video overflow-hidden rounded-lg border">
+      {loading ? (
+        <div className="w-full h-full bg-muted animate-pulse" />
+      ) : (
+        <Image
+          src={imageUrl || "https://placehold.co/600x400.png"}
+          alt={project.title}
+          width={600}
+          height={400}
+          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+          data-ai-hint={project.imageHint || project.imagePrompt}
+        />
+      )}
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
@@ -76,16 +111,7 @@ export default function Projects() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col gap-4">
-                <div className="aspect-video overflow-hidden rounded-lg border">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint={project.imageHint}
-                  />
-                </div>
+                <ProjectImage project={project} />
                 <CardDescription className="flex-grow">
                   {project.description}
                 </CardDescription>
