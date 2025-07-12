@@ -6,15 +6,15 @@ const experiences = [
   {
     role: "Unity Game Developer",
     company: "Malger Entertainments",
-    period: "Present",
-    description: "Currently contributing to the development of engaging games, focusing on gameplay mechanics, performance optimization, and creating immersive user experiences.",
+    period: "May 2025 - Present",
+    description: "Currently working with AR/VR tools on innovative projects, including the AR Building Simulation and VR Industrial Safety applications, to create immersive and practical solutions.",
     isCurrent: true
   },
   {
     role: "Unity Game Developer",
     company: "Emergio Games",
-    period: "Previous Role",
-    description: "Developed and maintained features for various mobile games. Collaborated with designers and artists to implement game features and enhance gameplay.",
+    period: "Mar 2024 - May 2025",
+    description: "Built and delivered interactive casino games, including the successful 'Triple Chance' title. Focused on creating engaging gameplay mechanics and polished user experiences for various casino projects.",
     isCurrent: false
   },
 ];
@@ -48,6 +48,7 @@ export default function Experience() {
                            <Building className="h-4 w-4" />
                            <span>{exp.company}</span>
                          </div>
+                         <p className="text-sm font-medium text-primary pt-2">{exp.period}</p>
                        </CardHeader>
                        <CardContent>
                          <p className="text-muted-foreground">{exp.description}</p>
@@ -72,6 +73,7 @@ export default function Experience() {
                            <Building className="h-4 w-4" />
                            <span>{exp.company}</span>
                          </div>
+                         <p className="text-sm font-medium text-primary pt-2">{exp.period}</p>
                        </CardHeader>
                        <CardContent>
                          <p className="text-muted-foreground">{exp.description}</p>
