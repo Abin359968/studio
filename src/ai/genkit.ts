@@ -5,7 +5,7 @@
  * This setup allows the application to leverage Google's AI capabilities for various features.
  */
 import {genkit} from 'genkit';
-import {googleAI} from 'genkit/googleai';
+import {googleAI} from '@genkit-ai/google-ai';
 
 export const ai = genkit({
   plugins: [
