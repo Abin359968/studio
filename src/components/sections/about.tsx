@@ -3,7 +3,7 @@ import { GraduationCap, BarChart, Trophy } from "lucide-react";
 const stats = [
   {
     icon: <Trophy className="h-8 w-8 text-primary" />,
-    value: "2+",
+    value: "1+",
     label: "Years Experience",
   },
   {
