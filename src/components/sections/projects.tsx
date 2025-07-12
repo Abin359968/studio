@@ -15,45 +15,44 @@ import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-const projects = [
+const projectsData = [
   {
     title: "VR Industrial Safety Simulation",
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "VR training simulation",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "virtual reality",
     liveUrl: "#",
   },
   {
     title: "AR Building Simulation",
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "AR building model",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "augmented reality",
     liveUrl: "#",
   },
   {
     title: "Tripple Chance Casino Game",
     description:
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "casino wheel game",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "casino game",
     liveUrl: "#",
   },
   {
     title: "Snow Escape",
     description:
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "endless runner game",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
+    imageUrl: "https://placehold.co/600x400.png",
+    imageHint: "snow game",
     liveUrl: "#",
   },
 ];
-
 
 export default function Projects() {
   return (
@@ -68,7 +67,7 @@ export default function Projects() {
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
-          {projects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <Card
               key={project.title}
               className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
@@ -80,16 +79,16 @@ export default function Projects() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col gap-4">
-                 <div className="aspect-video overflow-hidden rounded-lg border">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                      data-ai-hint={project.imageHint}
-                    />
-                  </div>
+                <div className="aspect-video overflow-hidden rounded-lg border">
+                  <Image
+                    src={project.imageUrl}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                    data-ai-hint={project.imageHint}
+                  />
+                </div>
                 <CardDescription className="flex-grow">
                   {project.description}
                 </CardDescription>
