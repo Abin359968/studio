@@ -34,6 +34,12 @@ export type GenerateProjectImageOutput = z.infer<
 export async function generateProjectImage(
   input: GenerateProjectImageInput
 ): Promise<GenerateProjectImageOutput> {
+  // Fallback to placeholder if API key is not set to prevent crashing
+  if (!process.env.GOOGLE_API_KEY) {
+    return {
+      imageUrl: `https://placehold.co/600x400.png`,
+    };
+  }
   return generateProjectImageFlow(input);
 }
 
