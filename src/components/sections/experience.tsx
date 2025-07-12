@@ -38,8 +38,8 @@ export default function Experience() {
               <div key={index} className="flex items-center w-full">
                 <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
                   {index % 2 !== 0 && (
-                     <div className="animate-fade-in-right">
-                       <Card className="text-left transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
+                     <div className="animate-fade-in-right [perspective:1000px]">
+                       <Card className="text-left transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2 hover:rotate-x-6 hover:-rotate-y-2">
                          <CardHeader>
                            <div className="flex items-center justify-between">
                               <CardTitle className="font-headline text-xl">{exp.role}</CardTitle>
@@ -65,8 +65,8 @@ export default function Experience() {
                 </div>
                 <div className={`w-1/2 ${index % 2 === 0 ? 'pl-8 text-left' : 'pr-8 text-right'}`}>
                   {index % 2 === 0 && (
-                    <div className="animate-fade-in-left">
-                     <Card className="text-left transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
+                    <div className="animate-fade-in-left [perspective:1000px]">
+                     <Card className="text-left transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-2 hover:rotate-x-6 hover:rotate-y-2">
                        <CardHeader>
                          <div className="flex items-center justify-between">
                             <CardTitle className="font-headline text-xl">{exp.role}</CardTitle>

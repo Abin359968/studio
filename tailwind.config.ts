@@ -101,21 +101,21 @@ export default {
         'fade-in-right': {
           '0%': {
             opacity: '0',
-            transform: 'translateX(-20px)',
+            transform: 'translateX(-30px) rotateY(20deg)',
           },
           '100%': {
             opacity: '1',
-            transform: 'translateX(0)',
+            transform: 'translateX(0) rotateY(0)',
           },
         },
         'fade-in-left': {
           '0%': {
             opacity: '0',
-            transform: 'translateX(20px)',
+            transform: 'translateX(30px) rotateY(-20deg)',
           },
           '100%': {
             opacity: '1',
-            transform: 'translateX(0)',
+            transform: 'translateX(0) rotateY(0)',
           },
         },
       },
