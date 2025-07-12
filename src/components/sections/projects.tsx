@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
+import { useToast } from "@/hooks/use-toast";
 
 const projectsData = [
   {
@@ -21,7 +23,6 @@ const projectsData = [
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
-    imageUrl: "https://placehold.co/600x400.png",
     imageHint: "virtual reality",
     liveUrl: "#",
   },
@@ -30,7 +31,6 @@ const projectsData = [
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
-    imageUrl: "https://placehold.co/600x400.png",
     imageHint: "augmented reality",
     liveUrl: "#",
   },
@@ -39,7 +39,6 @@ const projectsData = [
     description:
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
-    imageUrl: "https://placehold.co/600x400.png",
     imageHint: "casino game",
     liveUrl: "#",
   },
@@ -48,11 +47,66 @@ const projectsData = [
     description:
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
-    imageUrl: "https://placehold.co/600x400.png",
     imageHint: "snow game",
     liveUrl: "#",
   },
 ];
+
+function ProjectImage({
+  title,
+  description,
+  imageHint,
+}: {
+  title: string;
+  description: string;
+  imageHint: string;
+}) {
+  const [imageUrl, setImageUrl] = React.useState<string | null>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const { toast } = useToast();
+
+  React.useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        setIsLoading(true);
+        const result = await generateProjectImage({ title, description });
+        setImageUrl(result.imageUrl);
+      } catch (error) {
+        console.error("Failed to generate image:", error);
+        toast({
+          title: "Image Generation Failed",
+          description: "Could not generate an image. Using a placeholder.",
+          variant: "destructive",
+        });
+        setImageUrl(`https://placehold.co/600x400.png`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchImage();
+  }, [title, description, toast]);
+
+  if (isLoading || !imageUrl) {
+    return (
+      <div className="aspect-video w-full flex items-center justify-center bg-muted/50 rounded-lg">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="aspect-video overflow-hidden rounded-lg border">
+      <Image
+        src={imageUrl}
+        alt={title}
+        width={600}
+        height={400}
+        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+        data-ai-hint={imageHint}
+      />
+    </div>
+  );
+}
 
 export default function Projects() {
   return (
@@ -79,16 +133,11 @@ export default function Projects() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col gap-4">
-                <div className="aspect-video overflow-hidden rounded-lg border">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-                    data-ai-hint={project.imageHint}
+                 <ProjectImage
+                    title={project.title}
+                    description={project.description}
+                    imageHint={project.imageHint}
                   />
-                </div>
                 <CardDescription className="flex-grow">
                   {project.description}
                 </CardDescription>
