@@ -25,6 +25,7 @@ const projectsData = [
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
     imageHint: "virtual reality fire safety",
+    staticImageUrl: "https://storage.googleapis.com/maker-studio-project-images-prod/portfolio-template/fire_safety.png",
   },
   {
     title: "AR Building Simulation",
@@ -53,17 +54,19 @@ const projectsData = [
 ];
 
 const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], index: number }) => {
-  const [imageUrl, setImageUrl] = React.useState<string | null>(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [imageUrl, setImageUrl] = React.useState<string | null>(project.staticImageUrl || null);
+  const [isLoading, setIsLoading] = React.useState(!project.staticImageUrl);
+  const isStatic = !!project.staticImageUrl;
 
   React.useEffect(() => {
+    if (project.staticImageUrl) return;
+
     const fetchImage = async () => {
       try {
         setIsLoading(true);
         const result = await generateProjectImage({ description: project.description });
-        // Use placeholder with hint for now as direct generation is not supported this way.
         const placeholderUrl = `https://placehold.co/600x400.png`;
-        setImageUrl(placeholderUrl);
+        setImageUrl(result.imageUrl || placeholderUrl);
       } catch (error) {
         console.error("Failed to generate image:", error);
         setImageUrl("https://placehold.co/600x400.png");
@@ -72,7 +75,7 @@ const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], in
       }
     };
     fetchImage();
-  }, [project.description]);
+  }, [project.description, project.staticImageUrl]);
 
   return (
     <Card
@@ -107,8 +110,12 @@ const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], in
       <CardFooter>
         <div className="flex justify-between w-full items-center">
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Bot className="h-4 w-4 text-primary" />
-                <span>AI Generated Image</span>
+               {!isStatic && (
+                 <>
+                    <Bot className="h-4 w-4 text-primary" />
+                    <span>AI Generated Image</span>
+                 </>
+               )}
             </div>
             <Button asChild>
                 <Link href={project.liveUrl} target="_blank">
@@ -136,7 +143,7 @@ export default function Projects() {
         </div>
         <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
           {projectsData.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+            <ProjectCard key={project.title} project={project as any} index={index} />
           ))}
         </div>
       </div>
