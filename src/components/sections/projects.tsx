@@ -53,7 +53,6 @@ const projectsData = [
     tags: ["Unity", "VR", "Development"],
     liveUrl: "#",
     imageHint: "virtual reality gaming",
-    staticImageUrl: "/VrGame.png",
   },
 ];
 
