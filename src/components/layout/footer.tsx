@@ -1,4 +1,4 @@
-import { Github, Linkedin, Gamepad2 } from "lucide-react";
+import { Linkedin, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -41,12 +41,7 @@ export default function Footer() {
             <h3 className="font-semibold text-lg font-headline">Connect</h3>
              <div className="flex items-center gap-2">
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="https://github.com" target="_blank" aria-label="GitHub">
-                    <Github className="h-6 w-6" />
-                  </Link>
-                </Button>
-                <Button variant="ghost" size="icon" asChild>
-                  <Link href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                  <Link href="https://www.linkedin.com/in/abin-c-96b636269?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
                     <Linkedin className="h-6 w-6" />
                   </Link>
                 </Button>
