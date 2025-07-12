@@ -25,7 +25,7 @@ const projectsData = [
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
     imageHint: "virtual reality fire safety",
-    staticImageUrl: "https://storage.googleapis.com/maker-studio-project-images-prod/portfolio-template/fire_safety.png",
+    staticImageUrl: "/images/fire_safety.png",
   },
   {
     title: "AR Building Simulation",
