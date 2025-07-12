@@ -14,14 +14,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { generateImage } from "@/ai/flows/generate-image-flow";
 
 const projects = [
   {
     title: "VR Industrial Safety Simulation",
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
-    imagePrompt: "A futuristic VR training simulation showing a factory worker learning to handle a fire emergency. The scene should be realistic with visible UI elements of the VR interface, displaying safety alerts and instructions. The environment should be a clean, modern industrial setting.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "vr simulation training",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
   },
@@ -29,7 +29,8 @@ const projects = [
     title: "AR Building Simulation",
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
-    imagePrompt: "An augmented reality view on a tablet showing a 3D architectural model of a modern skyscraper overlaid onto a real-world construction site. The UI should be clean, showing measurements and material information.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "augmented reality architecture",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
     liveUrl: "#",
   },
@@ -37,7 +38,8 @@ const projects = [
     title: "Tripple Chance Casino Game",
     description:
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
-    imagePrompt: "A colorful and flashy casino prize wheel game interface on a screen. The theme is 'Triple Chance' with vibrant gems and gold coins. The wheel is spinning, and bonus icons are visible.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "casino wheel game",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
     liveUrl: "#",
   },
@@ -45,7 +47,8 @@ const projects = [
     title: "Snow Escape",
     description:
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
-    imagePrompt: "A dynamic endless runner game screen on a mobile phone. The character is skiing down a snowy mountain, dodging pine trees and rocks. The art style is stylized and vibrant, with a clear user interface showing the score and power-ups.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "snowy mountain game",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
     liveUrl: "#",
   },
@@ -53,35 +56,16 @@ const projects = [
 
 
 function ProjectImage({ project }: { project: (typeof projects)[0] }) {
-  const [imageUrl, setImageUrl] = React.useState(project.image);
-  const [loading, setLoading] = React.useState(!project.image);
-
-  React.useEffect(() => {
-    if (project.imagePrompt && !project.image) {
-      generateImage({ prompt: project.imagePrompt })
-        .then((response) => {
-          if (response.imageUrl) {
-            setImageUrl(response.imageUrl);
-          }
-        })
-        .finally(() => setLoading(false));
-    }
-  }, [project.imagePrompt, project.image]);
-
   return (
     <div className="aspect-video overflow-hidden rounded-lg border">
-      {loading ? (
-        <div className="w-full h-full bg-muted animate-pulse" />
-      ) : (
-        <Image
-          src={imageUrl || "https://placehold.co/600x400.png"}
-          alt={project.title}
-          width={600}
-          height={400}
-          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-          data-ai-hint={project.imageHint || project.imagePrompt}
-        />
-      )}
+      <Image
+        src={project.image || "https://placehold.co/600x400.png"}
+        alt={project.title}
+        width={600}
+        height={400}
+        className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+        data-ai-hint={project.imageHint}
+      />
     </div>
   );
 }

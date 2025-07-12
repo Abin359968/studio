@@ -6,7 +6,6 @@ import Projects from "@/components/sections/projects";
 import Skills from "@/components/sections/skills";
 import Contact from "@/components/sections/contact";
 import Footer from "@/components/layout/footer";
-import ChatWidget from "@/components/chat/chat-widget";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <ChatWidget />
     </div>
   );
 }
