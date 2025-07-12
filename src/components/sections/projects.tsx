@@ -45,14 +45,6 @@ const projectsData = [
     imageHint: "casino game wheel",
     staticImageUrl: "/TrippleChance.png",
   },
-  {
-    title: "Snow Escape",
-    description:
-      "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
-    tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
-    liveUrl: "#",
-    imageHint: "snow mountain game",
-  },
 ];
 
 const ProjectCard = ({ project, index }: { project: (typeof projectsData)[0], index: number }) => {
