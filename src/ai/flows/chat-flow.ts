@@ -1,8 +1,8 @@
 'use server';
 
 import { ai } from '@/ai/genkit';
-import {NextRequest, NextResponse} from 'next/server';
-import {run} from '@genkit-ai/next';
+import { streamToResponse } from 'ai';
+import {NextRequest} from 'next/server';
 
 const portfolioContext = `
 You are a helpful and friendly AI assistant for the portfolio of Abin C.
@@ -38,7 +38,6 @@ const chatPrompt = ai.definePrompt(
   {
     name: 'portfolioChatPrompt',
     system: portfolioContext,
-    tools: [],
   },
   async (history) => {
     return {
@@ -51,14 +50,13 @@ const chatPrompt = ai.definePrompt(
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
 
-  const stream = await run(chatPrompt, async (prompt) => {
-    const response = await ai.generate({
-      prompt: { messages: prompt(messages).messages },
-      model: 'googleai/gemini-2.0-flash',
-      stream: true,
-    });
-    return response.stream;
+  const prompt = await chatPrompt(messages);
+
+  const llmResponse = await ai.generate({
+    prompt: { messages: prompt.messages },
+    model: 'googleai/gemini-2.0-flash',
+    stream: true,
   });
 
-  return new Response(stream);
+  return streamToResponse(llmResponse.stream);
 }
