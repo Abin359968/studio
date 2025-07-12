@@ -43,6 +43,7 @@ const projectsData = [
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
     liveUrl: "#",
     imageHint: "casino game wheel",
+    staticImageUrl: "/TrippleChance.jpg",
   },
   {
     title: "Snow Escape",
