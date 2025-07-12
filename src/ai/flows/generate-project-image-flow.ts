@@ -3,13 +3,8 @@
  */
 'use server';
 
-import {genkit} from 'genkit';
+import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {googleAI} from '@/lib/google-ai-plugin';
-
-const ai = genkit({
-  plugins: [googleAI()],
-});
 
 export const GenerateProjectImageInputSchema = z.object({
   title: z.string().describe('The title of the project.'),
@@ -37,10 +32,10 @@ export async function generateProjectImage(
   Avoid text and logos. Focus on high-quality visuals.`;
 
   if (!process.env.GOOGLE_API_KEY) {
-    console.warn("GOOGLE_API_KEY not found. Returning placeholder image.");
-    return { imageUrl: "https://placehold.co/600x400.png" };
+    console.warn('GOOGLE_API_KEY not found. Returning placeholder image.');
+    return {imageUrl: 'https://placehold.co/600x400.png'};
   }
-  
+
   try {
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
@@ -58,6 +53,6 @@ export async function generateProjectImage(
   } catch (error) {
     console.error('Error generating project image:', error);
     // Return a placeholder if generation fails
-    return { imageUrl: "https://placehold.co/600x400.png" };
+    return {imageUrl: 'https://placehold.co/600x400.png'};
   }
 }

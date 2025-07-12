@@ -2,7 +2,7 @@
  * @fileoverview This file initializes the Genkit AI singleton.
  */
 import {genkit} from 'genkit';
-import {googleAI} from '@/lib/google-ai-plugin';
+import {googleAI} from '@genkit-ai/google-ai';
 
 export const ai = genkit({
   plugins: [googleAI()],
