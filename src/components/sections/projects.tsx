@@ -28,7 +28,7 @@ const projects = [
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
     image: "https://placehold.co/600x400.png",
     imageHint: "augmented reality architecture",
-    tags: ["Unity", "ARCore", "ARKit", "Vuforia"],
+    tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
     liveUrl: "#",
   },
   {
