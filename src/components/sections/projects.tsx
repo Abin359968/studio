@@ -18,7 +18,7 @@ const projects = [
     description: "An immersive 3D open-world adventure game built with Unity.",
     image: "https://placehold.co/600x400.png",
     imageHint: "fantasy game",
-    tags: ["Unity", "3D", "C#"],
+    tags: ["Unity", "3D", "C#", "Photon"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -27,7 +27,7 @@ const projects = [
     description: "An augmented reality application for interactive product visualization.",
     image: "https://placehold.co/600x400.png",
     imageHint: "sci-fi interface",
-    tags: ["Unity", "AR", "Mobile"],
+    tags: ["Unity", "ARCore", "Vuforia"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -36,16 +36,16 @@ const projects = [
     description: "A virtual reality training simulation for complex industrial tasks.",
     image: "https://placehold.co/600x400.png",
     imageHint: "virtual reality",
-    tags: ["Unity", "VR", "Oculus"],
+    tags: ["Unity", "VR", "Oculus SDK"],
     liveUrl: "#",
     githubUrl: "#",
   },
   {
-    title: "2D Platformer",
-    description: "A classic 2D platformer with modern mechanics and pixel art style.",
+    title: "Pixel Platformer",
+    description: "A classic 2D platformer with modern mechanics and a retro pixel art style.",
     image: "https://placehold.co/600x400.png",
     imageHint: "mobile game",
-    tags: ["Unity", "2D", "Mobile"],
+    tags: ["Unity", "2D", "Mobile", "C#"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -53,9 +53,9 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full py-12 md:py-24 lg:py-32 bg-secondary">
+    <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
             My Projects
           </h2>
@@ -63,14 +63,17 @@ export default function Projects() {
             A selection of my work in game and interactive media development.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
-          {projects.map((project) => (
-            <Card key={project.title} className="flex flex-col overflow-hidden group">
+        <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
+          {projects.map((project, index) => (
+            <Card 
+              key={project.title} 
+              className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
               <CardHeader>
                 <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
-                <CardDescription>{project.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-grow">
+              <CardContent className="flex-grow flex flex-col gap-4">
                 <div className="aspect-video overflow-hidden rounded-lg border">
                   <Image
                     src={project.image}
@@ -81,7 +84,8 @@ export default function Projects() {
                     data-ai-hint={project.imageHint}
                   />
                 </div>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <CardDescription className="flex-grow">{project.description}</CardDescription>
+                <div className="mt-2 flex flex-wrap gap-2">
                     {project.tags.map(tag => (
                         <Badge key={tag} variant="secondary">{tag}</Badge>
                     ))}
