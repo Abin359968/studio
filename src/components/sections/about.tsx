@@ -15,15 +15,15 @@ export default function About() {
               passion for leveraging cutting-edge technologies to bring creative
               visions to life. As a quick learner with strong critical-thinking
               abilities, I thrive on mastering new concepts and pushing the
-              boundaries of digital interaction.
+              boundaries of digital interaction. My journey is not just about writing code; it's about architecting entire worlds and interactive stories.
             </p>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               My journey in game development is driven by a desire to create
               unforgettable experiences. I specialize in the Unity engine for
               both 2D and 3D games, and I have a deep expertise in creating
-              immersive AR and VR applications. From conceptualization to
+              immersive AR and VR applications. From conceptualization and prototyping to optimization and
               deployment, I am dedicated to delivering polished, innovative, and
-              deeply engaging solutions.
+              deeply engaging solutions that resonate with players.
             </p>
           </div>
         </div>

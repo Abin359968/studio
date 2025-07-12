@@ -4,32 +4,32 @@ import { Box, CodeXml, Camera, Gamepad2, MonitorSmartphone, Bot } from "lucide-r
 const skills = [
   {
     name: "Unity Development",
-    description: "Core engine mechanics, physics, and asset pipeline.",
+    description: "Expertise in core engine mechanics, physics, shaders, and the end-to-end asset pipeline for 2D & 3D projects.",
     icon: <Box className="h-10 w-10 text-accent" />,
   },
   {
     name: "C# Programming",
-    description: "Scripting gameplay, UI, and editor tools.",
+    description: "Advanced C# scripting for gameplay systems, complex UI, editor extensions, and performance optimization.",
     icon: <CodeXml className="h-10 w-10 text-accent" />,
   },
   {
     name: "AR Technology",
-    description: "ARCore, ARKit, and Vuforia for immersive experiences.",
+    description: "Developing immersive augmented reality applications using ARCore, ARKit, and Vuforia for mobile platforms.",
     icon: <Camera className="h-10 w-10 text-accent" />,
   },
   {
     name: "VR Technology",
-    description: "Oculus SDK, SteamVR, and interaction design.",
+    description: "Building high-fidelity virtual reality experiences with the Oculus SDK and SteamVR, focusing on intuitive interaction design.",
     icon: <Gamepad2 className="h-10 w-10 text-accent" />,
   },
   {
     name: "2D & 3D Game Dev",
-    description: "From pixel art platformers to vast 3D worlds.",
+    description: "Full-cycle development capabilities, from crafting pixel-perfect 2D platformers to building expansive 3D worlds.",
     icon: <MonitorSmartphone className="h-10 w-10 text-accent" />,
   },
   {
     name: "Emerging Tech",
-    description: "AI integration, procedural generation, and more.",
+    description: "Integrating next-gen features like generative AI for dynamic content, procedural generation, and intelligent NPCs.",
     icon: <Bot className="h-10 w-10 text-accent" />,
   },
 ];
@@ -43,7 +43,7 @@ export default function Skills() {
             My Expertise
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            A versatile skill set for creating modern, immersive digital experiences.
+            A versatile skill set for creating modern, immersive digital experiences. I combine technical proficiency with a creative vision to build the next generation of interactive entertainment.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
