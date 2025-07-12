@@ -32,7 +32,7 @@ const projectsData = [
     title: "AR Building Simulation",
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
-    tags: ["Unity", "ZapWorks", "ARCore", "ARKit"],
+    tags: ["Unity", "ARCore", "ARKit"],
     liveUrl: "#",
     imageHint: "augmented reality architecture",
     staticImageUrl: "/Ar_Building.jpg",
@@ -53,6 +53,7 @@ const projectsData = [
     tags: ["Unity", "VR", "Development"],
     liveUrl: "#",
     imageHint: "virtual reality gaming",
+    staticImageUrl: "/VrGame.png",
   },
 ];
 
