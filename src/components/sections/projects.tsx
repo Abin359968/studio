@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -12,15 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, RefreshCw } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
-import { Skeleton } from "../ui/skeleton";
-
-type GenerateProjectImageInput = {
-  title: string;
-  description: string;
-};
 
 const projectsData = [
   {
@@ -28,7 +20,6 @@ const projectsData = [
     description:
       "A high-fidelity virtual reality simulation for training employees in fire safety procedures and emergency response in industrial environments, significantly improving workplace safety.",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
-    imageHint: "virtual reality fire safety",
     liveUrl: "#",
   },
   {
@@ -36,7 +27,6 @@ const projectsData = [
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
-    imageHint: "augmented reality construction",
     liveUrl: "#",
   },
   {
@@ -44,7 +34,6 @@ const projectsData = [
     description:
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
-    imageHint: "casino game wheel",
     liveUrl: "#",
   },
   {
@@ -52,38 +41,11 @@ const projectsData = [
     description:
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
-    imageHint: "snow mountain game",
     liveUrl: "#",
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: GenerateProjectImageInput & { tags: string[], liveUrl: string, imageHint: string }, index: number }) => {
-  const [imageUrl, setImageUrl] = React.useState<string | null>(null);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
-
-  const fetchImage = React.useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const result = await generateProjectImage({
-        title: project.title,
-        description: project.description,
-      });
-      setImageUrl(result.imageUrl);
-    } catch (e) {
-      console.error(e);
-      setError("Image generation failed.");
-      setImageUrl("https://placehold.co/600x400.png");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [project.title, project.description]);
-
-  React.useEffect(() => {
-    fetchImage();
-  }, [fetchImage]);
-
+const ProjectCard = ({ project, index }: { project: { title: string; description: string; tags: string[], liveUrl: string }, index: number }) => {
   return (
     <Card
       className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
@@ -93,30 +55,6 @@ const ProjectCard = ({ project, index }: { project: GenerateProjectImageInput & 
         <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col gap-4">
-        <div className="aspect-video overflow-hidden rounded-lg border relative">
-          {isLoading ? (
-            <Skeleton className="w-full h-full" />
-          ) : (
-            <Image
-              src={imageUrl || "https://placehold.co/600x400.png"}
-              alt={project.title}
-              width={600}
-              height={400}
-              data-ai-hint={project.imageHint}
-              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-            />
-          )}
-          <Button
-            size="icon"
-            variant="secondary"
-            className="absolute top-2 right-2 h-8 w-8"
-            onClick={fetchImage}
-            disabled={isLoading}
-            aria-label="Regenerate image"
-          >
-            <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-          </Button>
-        </div>
         <CardDescription className="flex-grow">{project.description}</CardDescription>
         <div className="mt-2 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
@@ -147,7 +85,7 @@ export default function Projects() {
             My Projects
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            A selection of my work in game and interactive media development. Images are dynamically generated placeholders.
+            A selection of my work in game and interactive media development.
           </p>
         </div>
         <div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
