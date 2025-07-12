@@ -36,8 +36,8 @@ const projects = [
   {
     title: "Tripple Chance Casino Game",
     description:
-      "A vibrant and engaging casino slot game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
-    imagePrompt: "A colorful and flashy casino slot machine game interface on a screen. The theme is 'Triple Chance' with vibrant gems and gold coins. The reels are spinning, and bonus icons are visible.",
+      "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
+    imagePrompt: "A colorful and flashy casino prize wheel game interface on a screen. The theme is 'Triple Chance' with vibrant gems and gold coins. The wheel is spinning, and bonus icons are visible.",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
     liveUrl: "#",
   },
