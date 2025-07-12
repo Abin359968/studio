@@ -21,7 +21,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="w-full py-20 md:py-32 bg-background">
+    <section id="experience" className="w-full py-20 md:py-32 bg-background overflow-hidden">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16 animate-fade-in-up">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
@@ -32,10 +32,10 @@ export default function Experience() {
           </p>
         </div>
         <div className="relative max-w-3xl mx-auto">
-          <div className="absolute left-6 h-full w-0.5 bg-border/40 top-2"></div>
+          <div className="absolute left-6 h-full w-0.5 bg-border/40 top-2 animate-fade-in-up animation-delay-200"></div>
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <div key={index} className="relative flex gap-8 animate-fade-in-up" style={{ animationDelay: `${index * 200 + 300}ms` }}>
+              <div key={index} className="relative flex gap-8 animate-fade-in-up" style={{ animationDelay: `${index * 200 + 400}ms` }}>
                  <div className="absolute left-0 top-1.5 z-10">
                     <div className="bg-primary rounded-full p-2.5 border-4 border-background">
                         <Briefcase className="h-7 w-7 text-primary-foreground" />
