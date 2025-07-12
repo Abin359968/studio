@@ -6,13 +6,12 @@
  * - GenerateProjectImageInput - The input type for the function.
  * - GenerateProjectImageOutput - The return type for the function.
  */
-import {genkit, z} from 'genkit';
+import {genkit} from 'genkit';
+import {z} from 'zod';
 import {googleAI} from '@/lib/google-ai-plugin';
 
 const ai = genkit({
-  plugins: [googleAI()],
-  logLevel: 'debug',
-  enableTracing: true,
+  plugins: [googleAI],
 });
 
 const GenerateProjectImageInputSchema = z.object({
