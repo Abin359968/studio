@@ -14,39 +14,39 @@ import Link from "next/link";
 
 const projects = [
   {
-    title: "Project Alpha: The Lost Kingdom",
-    description:
-      "An immersive 3D open-world adventure where players explore ancient ruins and battle mythical creatures. Features a dynamic weather system and advanced enemy AI.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "fantasy game",
-    tags: ["Unity", "3D", "C#", "Photon", "World-Building"],
-    liveUrl: "#",
-  },
-  {
-    title: "AR-Retail Experience",
-    description:
-      "An augmented reality application for a leading furniture brand that allows users to visualize products in their own space before buying, boosting sales conversion by 30%.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "sci-fi interface",
-    tags: ["Unity", "ARCore", "Vuforia", "Mobile"],
-    liveUrl: "#",
-  },
-  {
     title: "VR Industrial Safety Simulation",
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
     image: "https://placehold.co/600x400.png",
-    imageHint: "virtual reality",
+    imageHint: "virtual reality industrial",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
   },
   {
-    title: "Pixel Raiders",
+    title: "AR Building Simulation",
     description:
-      "A fast-paced 2D platformer with procedurally generated levels, modern combat mechanics, and a charming retro pixel art style. Optimized for mobile and desktop.",
+      "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
     image: "https://placehold.co/600x400.png",
-    imageHint: "mobile game",
-    tags: ["Unity", "2D", "Mobile", "C#", "Pixel Art"],
+    imageHint: "augmented reality architecture",
+    tags: ["Unity", "ARCore", "ARKit", "Vuforia"],
+    liveUrl: "#",
+  },
+  {
+    title: "Tripple Chance Casino Game",
+    description:
+      "A vibrant and engaging casino slot game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "casino game",
+    tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
+    liveUrl: "#",
+  },
+  {
+    title: "Snow Escape",
+    description:
+      "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "snowy mountain game",
+    tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
     liveUrl: "#",
   },
 ];
