@@ -17,13 +17,18 @@ import Link from "next/link";
 import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
 import { Skeleton } from "../ui/skeleton";
 
+type GenerateProjectImageInput = {
+  title: string;
+  description: string;
+};
+
 const projectsData = [
   {
-    title: "VR Industrial Safety Simulation",
+    title: "VR Fire and Safety Simulation",
     description:
-      "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
+      "A high-fidelity virtual reality simulation for training employees in fire safety procedures and emergency response in industrial environments, significantly improving workplace safety.",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
-    imageHint: "virtual reality industrial",
+    imageHint: "virtual reality fire safety",
     liveUrl: "#",
   },
   {
@@ -52,7 +57,7 @@ const projectsData = [
   },
 ];
 
-const ProjectCard = ({ project, index }: { project: typeof projectsData[0], index: number }) => {
+const ProjectCard = ({ project, index }: { project: GenerateProjectImageInput & { tags: string[], liveUrl: string, imageHint: string }, index: number }) => {
   const [imageUrl, setImageUrl] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
@@ -97,6 +102,7 @@ const ProjectCard = ({ project, index }: { project: typeof projectsData[0], inde
               alt={project.title}
               width={600}
               height={400}
+              data-ai-hint={project.imageHint}
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             />
           )}
