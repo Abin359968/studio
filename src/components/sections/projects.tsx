@@ -14,14 +14,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { generateImage, type GenerateImageOutput } from '@/ai/flows/generate-image-flow';
 
 const projects = [
   {
     title: "VR Industrial Safety Simulation",
     description:
       "A high-fidelity virtual reality simulation for training heavy machinery operators in hazardous environments, significantly reducing workplace accidents.",
-    imagePrompt: "A futuristic VR training simulation showing a factory worker learning to handle a fire emergency. The scene should be realistic with visible UI elements of the VR interface, displaying safety alerts and instructions. The environment should be a clean, modern industrial setting.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "VR training simulation",
     tags: ["Unity", "VR", "Oculus SDK", "Training"],
     liveUrl: "#",
   },
@@ -29,7 +29,8 @@ const projects = [
     title: "AR Building Simulation",
     description:
       "An augmented reality application for architects and construction professionals to visualize and interact with 3D building models on-site, improving planning and reducing errors.",
-    imagePrompt: "An architect wearing an AR headset, overlaying a holographic 3D model of a skyscraper onto a physical construction site. The image should be photorealistic, capturing the blend of digital and real-world elements.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "AR building model",
     tags: ["Unity", "ZapWorks", "ARCore", "ARKit", "Vuforia"],
     liveUrl: "#",
   },
@@ -37,7 +38,8 @@ const projects = [
     title: "Tripple Chance Casino Game",
     description:
       "A vibrant and engaging casino wheel game with unique 'Tripple Chance' mechanics, multiple bonus rounds, and captivating visual effects to maximize player retention.",
-    imagePrompt: "A brightly lit, colorful casino wheel of fortune, with a dynamic, glowing user interface. The background should have a luxury casino feel, with subtle hints of other games.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "casino wheel game",
     tags: ["Unity", "2D", "Mobile", "C#", "UI/UX"],
     liveUrl: "#",
   },
@@ -45,46 +47,13 @@ const projects = [
     title: "Snow Escape",
     description:
       "An endless runner mobile game where players navigate a treacherous snowy mountain, avoiding obstacles and collecting power-ups. Features responsive controls and dynamic difficulty.",
-    imagePrompt: "A thrilling, action-packed scene from a 3D endless runner game. The character, a snowboarder, is mid-air, navigating a narrow, snowy mountain pass with dynamic lighting and particle effects.",
+    image: "https://placehold.co/600x400.png",
+    imageHint: "endless runner game",
     tags: ["Unity", "3D", "Mobile", "C#", "Endless Runner"],
     liveUrl: "#",
   },
 ];
 
-
-function ProjectImage({ project }: { project: (typeof projects)[0] & { image?: string } }) {
-  const [imageUrl, setImageUrl] = React.useState(project.image);
-  const [loading, setLoading] = React.useState(!project.image);
-
-  React.useEffect(() => {
-    if (project.imagePrompt && !project.image) {
-      generateImage({ prompt: project.imagePrompt })
-        .then((response: GenerateImageOutput) => {
-          if (response.imageUrl) {
-            setImageUrl(response.imageUrl);
-          }
-        })
-        .finally(() => setLoading(false));
-    }
-  }, [project.imagePrompt, project.image]);
-
-  return (
-    <div className="aspect-video overflow-hidden rounded-lg border">
-      {loading ? (
-        <div className="w-full h-full bg-muted animate-pulse" />
-      ) : (
-        <Image
-          src={imageUrl || "https://placehold.co/600x400.png"}
-          alt={project.title}
-          width={600}
-          height={400}
-          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-          data-ai-hint={project.imagePrompt}
-        />
-      )}
-    </div>
-  );
-}
 
 export default function Projects() {
   return (
@@ -111,7 +80,16 @@ export default function Projects() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col gap-4">
-                <ProjectImage project={project} />
+                 <div className="aspect-video overflow-hidden rounded-lg border">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      width={600}
+                      height={400}
+                      className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                      data-ai-hint={project.imageHint}
+                    />
+                  </div>
                 <CardDescription className="flex-grow">
                   {project.description}
                 </CardDescription>
