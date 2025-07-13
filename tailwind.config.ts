@@ -107,17 +107,12 @@ export default {
             'background-position': '100% 50%',
           },
         },
-        'fill-text': {
-          '0%': { 'background-size': '0% 100%', 'background-position': '0% 50%' },
-          '100%': { 'background-size': '100% 100%', 'background-position': '0% 50%' },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'gradient-shift': 'gradient-shift 10s ease infinite',
-        'fill-text': 'fill-text 2s ease-out',
+        'gradient-shift': 'gradient-shift 6s ease infinite',
       },
     },
   },
