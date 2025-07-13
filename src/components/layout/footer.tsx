@@ -1,6 +1,9 @@
+"use client";
+
 import { Linkedin, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -11,6 +14,12 @@ const navLinks = [
 ];
 
 export default function Footer() {
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="w-full bg-secondary border-t border-border/40">
       <div className="container mx-auto max-w-7xl px-4 py-8">
@@ -50,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
-           <p>© {new Date().getFullYear()} Abin C. All rights reserved.</p>
+           <p>© {currentYear || new Date().getFullYear()} Abin C. All rights reserved.</p>
         </div>
       </div>
     </footer>

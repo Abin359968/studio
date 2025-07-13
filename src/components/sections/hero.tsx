@@ -1,11 +1,40 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Download, ArrowRight } from "lucide-react";
+import { Download, ArrowRight, Mouse } from "lucide-react";
 import Link from "next/link";
+import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
+import React, { useEffect, useState } from "react";
 
 export default function Hero() {
   const name = "Abin C.";
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+
+  useEffect(() => {
+    // This code now only runs on the client
+    setWindowHeight(window.innerHeight);
+  }, []);
+
+  const colors = ["#4B0082", "#9400D3", "#8A2BE2", "#9932CC", "#800080"];
+  const color = useTransform(mouseY, [0, windowHeight], colors);
+  
+  const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  };
+  
+  const background = useMotionTemplate`radial-gradient(circle at ${mouseX}px ${mouseY}px, ${color} 0%, transparent 50%)`;
+
   return (
-    <section className="relative w-full h-screen min-h-[700px] flex items-center justify-center text-center overflow-hidden">
+    <motion.section 
+      id="home"
+      onMouseMove={handleMouseMove}
+      className="relative w-full h-screen min-h-[700px] flex items-center justify-center text-center overflow-hidden"
+    >
       <div className="absolute inset-0 w-full h-full bg-background -z-20" />
       <div className="vr-box">
         <div className="vr-box-content">
@@ -13,51 +42,91 @@ export default function Hero() {
           <div className="vr-plane ceiling"></div>
         </div>
       </div>
+       <motion.div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{ background }}
+      />
+      <motion.div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          filter: "blur(100px)",
+          background,
+        }}
+      />
 
 
       <div className="container px-4 md:px-6 z-10">
         <div className="flex flex-col items-center space-y-6">
-          <div className="text-lg md:text-xl font-medium text-primary font-headline animate-fade-in-up">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg md:text-xl font-medium text-primary font-headline"
+          >
             Hi, I&apos;m{" "}
             <span className="inline-block">
               {name.split("").map((letter, index) => (
-                <span
+                <motion.span
                   key={index}
-                  className="inline-block animate-fade-in-up"
-                  style={{ animationDelay: `${200 + index * 50}ms`, animationFillMode: 'backwards' }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.05 }}
+                  className="inline-block"
                 >
                   {letter === " " ? "\u00A0" : letter}
-                </span>
+                </motion.span>
               ))}
             </span>
-          </div>
-          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-primary via-accent to-white bg-[200%_auto] animate-gradient-shift" style={{animationDelay: '400ms'}}>
+          </motion.div>
+          
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.6, type: "spring", stiffness: 100 }}
+            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60 animate-gradient-shift"
+          >
             Game Developer
-          </h1>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl animate-fade-in-up" style={{animationDelay: '600ms'}}>
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="max-w-[700px] text-muted-foreground md:text-xl"
+          >
             Crafting immersive and innovative 2D, 3D, AR & VR experiences from
             concept to reality.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-6 animate-fade-in-up" style={{animationDelay: '800ms'}}>
-            <Button
-              asChild
-              size="lg"
-              variant="default"
-              className="shadow-lg shadow-primary/30"
-            >
-              <Link href="#projects">
-                View My Work <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href="/resume.pdf" download="Abin_C_Resume.pdf">
-                <Download className="mr-2 h-5 w-5" />
-                Download Resume
-              </a>
-            </Button>
-          </div>
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.0 }}
+            className="flex flex-col sm:flex-row gap-4 pt-6"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button
+                asChild
+                size="lg"
+                variant="default"
+                className="shadow-lg shadow-primary/30"
+              >
+                <Link href="#projects">
+                  View My Work <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button asChild size="lg" variant="outline">
+                <a href="/resume.pdf" download="Abin_C_Resume.pdf">
+                  <Download className="mr-2 h-5 w-5" />
+                  Download Resume
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

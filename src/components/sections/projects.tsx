@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import useParallax from "@/hooks/use-parallax";
+import { motion } from "framer-motion";
 
 const projectsData = [
   {
@@ -54,21 +55,32 @@ const projectsData = [
   },
 ];
 
+const cardVariants = {
+  hidden: { y: 50, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 const ProjectCard = ({ project }: { project: (typeof projectsData)[0] }) => {
   const imageUrl = project.staticImageUrl;
   const isLoading = !imageUrl;
   const ref = React.useRef<HTMLDivElement>(null);
-  const { y } = useParallax(ref, -10);
+  const { y } = useParallax(ref, -20);
 
   return (
-    <div ref={ref}>
+    <motion.div ref={ref} variants={cardVariants}>
       <Card
-        style={{ y }}
         className={cn(
-          "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 h-full"
+          "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl h-full"
         )}
       >
-        <div className="aspect-video overflow-hidden">
+        <motion.div style={{ y }} className="aspect-video overflow-hidden">
           {isLoading ? (
             <Skeleton className="w-full h-full" />
           ) : (
@@ -78,10 +90,10 @@ const ProjectCard = ({ project }: { project: (typeof projectsData)[0] }) => {
               width={600}
               height={400}
               data-ai-hint={project.imageHint}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
           )}
-        </div>
+        </motion.div>
         <CardHeader>
           <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
         </CardHeader>
@@ -96,17 +108,37 @@ const ProjectCard = ({ project }: { project: (typeof projectsData)[0] }) => {
         <CardFooter>
         </CardFooter>
       </Card>
-    </div>
+    </motion.div>
   );
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 
 export default function Projects() {
   return (
-    <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
+    <motion.section 
+      id="projects" 
+      className="w-full py-20 md:py-32 bg-secondary"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div
+        <motion.div
           className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
+          variants={{
+            hidden: { y: -20, opacity: 0 },
+            visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
+          }}
         >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
             My Projects
@@ -114,16 +146,19 @@ export default function Projects() {
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             A selection of my work in game and interactive media development.
           </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        </motion.div>
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          variants={containerVariants}
+        >
           {projectsData.map((project) => (
             <ProjectCard 
               key={project.title} 
               project={project as any} 
             />
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
