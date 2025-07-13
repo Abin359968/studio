@@ -7,11 +7,15 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen min-h-[700px] flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-background -z-20" />
-      <div
-        className="absolute inset-0 -z-10 bg-grid-primary/10 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
-      />
+      <div className="vr-box">
+        <div className="vr-box-content">
+          <div className="vr-plane floor"></div>
+          <div className="vr-plane ceiling"></div>
+        </div>
+      </div>
 
-      <div className="container px-4 md:px-6">
+
+      <div className="container px-4 md:px-6 z-10">
         <div className="flex flex-col items-center space-y-6">
           <div className="text-lg md:text-xl font-medium text-primary font-headline animate-fade-in-up">
             Hi, I&apos;m{" "}
