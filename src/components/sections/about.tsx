@@ -1,4 +1,5 @@
 import { GraduationCap, BarChart, Trophy } from "lucide-react";
+import Observer from "@/components/lib/observer";
 
 const stats = [
   {
@@ -24,7 +25,7 @@ export default function About() {
     <section id="about" className="w-full py-20 md:py-32">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="space-y-6 animate-fade-in-right">
+          <Observer animation="fade-in-right" className="space-y-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl font-headline text-primary">
               About Me
             </h2>
@@ -43,10 +44,15 @@ export default function About() {
               deployment, I am dedicated to delivering polished, innovative, and
               deeply engaging solutions that resonate with players.
             </p>
-          </div>
-          <div className="flex flex-col gap-8 animate-fade-in-left">
+          </Observer>
+          <div className="flex flex-col gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="flex items-start gap-6">
+              <Observer
+                key={index}
+                animation="fade-in-left"
+                className="flex items-start gap-6"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
                 <div className="bg-primary/10 p-4 rounded-full">
                   {stat.icon}
                 </div>
@@ -59,7 +65,7 @@ export default function About() {
                      <p className="text-sm text-muted-foreground mt-1">{stat.description}</p>
                    )}
                 </div>
-              </div>
+              </Observer>
             ))}
           </div>
         </div>

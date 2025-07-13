@@ -11,9 +11,9 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bot } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import Observer from "../lib/observer";
 
 const projectsData = [
   {
@@ -59,41 +59,46 @@ const ProjectCard = ({ project, className, index }: { project: (typeof projectsD
   const isLoading = !imageUrl;
 
   return (
-    <Card
-      className={cn(
-        "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up",
-        className
-      )}
+    <Observer
+      animation="fade-in-up"
+      className="h-full"
       style={{ animationDelay: `${index * 150}ms` }}
     >
-      <div className="aspect-video overflow-hidden">
-        {isLoading ? (
-          <Skeleton className="w-full h-full" />
-        ) : (
-          <Image
-            src={imageUrl || "https://placehold.co/600x400.png"}
-            alt={project.title}
-            width={600}
-            height={400}
-            data-ai-hint={project.imageHint}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+      <Card
+        className={cn(
+          "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 h-full",
+          className
         )}
-      </div>
-      <CardHeader>
-        <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-grow flex flex-col gap-4">
-        <CardDescription className="flex-grow">{project.description}</CardDescription>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <Badge key={tag} variant="secondary">{tag}</Badge>
-          ))}
+      >
+        <div className="aspect-video overflow-hidden">
+          {isLoading ? (
+            <Skeleton className="w-full h-full" />
+          ) : (
+            <Image
+              src={imageUrl || "https://placehold.co/600x400.png"}
+              alt={project.title}
+              width={600}
+              height={400}
+              data-ai-hint={project.imageHint}
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          )}
         </div>
-      </CardContent>
-      <CardFooter>
-      </CardFooter>
-    </Card>
+        <CardHeader>
+          <CardTitle className="font-headline text-2xl">{project.title}</CardTitle>
+        </CardHeader>
+        <CardContent className="flex-grow flex flex-col gap-4">
+          <CardDescription className="flex-grow">{project.description}</CardDescription>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <Badge key={tag} variant="secondary">{tag}</Badge>
+            ))}
+          </div>
+        </CardContent>
+        <CardFooter>
+        </CardFooter>
+      </Card>
+    </Observer>
   );
 };
 
@@ -102,14 +107,17 @@ export default function Projects() {
   return (
     <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+        <Observer
+          animation="fade-in-up"
+          className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
+        >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
             My Projects
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             A selection of my work in game and interactive media development.
           </p>
-        </div>
+        </Observer>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
             <ProjectCard 
