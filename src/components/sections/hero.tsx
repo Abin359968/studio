@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import React from "react";
 
 export default function Hero() {
@@ -14,21 +14,10 @@ export default function Hero() {
 
   const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent<HTMLDivElement>) => {
     if (!currentTarget) return;
-    const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    const x = clientX - left;
-    const y = clientY - top;
-    mouseX.set(x - width / 2);
-    mouseY.set(y - height / 2);
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
   };
-
-  const background = useMotionTemplate`radial-gradient(400px circle at ${useMotionValue(0)}px ${useMotionValue(0)}px, hsl(var(--primary) / 0.15), transparent 80%)`;
-  
-  const mouseXSmooth = useTransform(mouseX, val => val * 0.1, { damping: 20, stiffness: 150 });
-  const mouseYSmooth = useTransform(mouseY, val => val * 0.1, { damping: 20, stiffness: 150 });
-
-  const parallaxX = (factor: number) => useTransform(mouseXSmooth, val => val * factor);
-  const parallaxY = (factor: number) => useTransform(mouseYSmooth, val => val * factor);
-
 
   return (
     <motion.section 
@@ -57,18 +46,14 @@ export default function Hero() {
       />
       
       <div className="container px-4 md:px-6 z-10">
-        <motion.div 
-          className="flex flex-col items-center space-y-6"
-          style={{ x: mouseXSmooth, y: mouseYSmooth }}
-        >
+        <div className="flex flex-col items-center space-y-6">
           <motion.div 
-            style={{ x: parallaxX(-0.3), y: parallaxY(-0.3) }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg md:text-xl font-medium text-primary font-headline"
           >
-            Hi, I&apos;m{" "}
+            Hi, I'm{" "}
             <span className="inline-block">
               {name.split("").map((letter, index) => (
                 <motion.span
@@ -84,23 +69,16 @@ export default function Hero() {
             </span>
           </motion.div>
           
-          <motion.div
-            style={{ x: parallaxX(0.2), y: parallaxY(0.2) }}
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.6, type: "spring", stiffness: 100 }}
+            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60"
           >
-            <motion.h1
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.6, type: "spring", stiffness: 100 }}
-              className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60"
-            >
-              Game Developer
-            </motion.h1>
-          </motion.div>
+            Game Developer
+          </motion.h1>
 
           <motion.p 
-            style={{ x: parallaxX(-0.2), y: parallaxY(-0.2) }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -111,7 +89,6 @@ export default function Hero() {
           </motion.p>
           
           <motion.div 
-            style={{ x: parallaxX(0.4), y: parallaxY(0.4) }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1.0 }}
@@ -138,7 +115,7 @@ export default function Hero() {
               </Button>
             </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );
