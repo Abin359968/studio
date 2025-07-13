@@ -99,26 +99,6 @@ export default {
             transform: 'translateY(0)',
           },
         },
-        'fade-in-right': {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(-30px) rotateY(20deg)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0) rotateY(0)',
-          },
-        },
-        'fade-in-left': {
-          '0%': {
-            opacity: '0',
-            transform: 'translateX(30px) rotateY(-20deg)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateX(0) rotateY(0)',
-          },
-        },
         'gradient-shift': {
           '0%, 100%': {
             'background-position': '0% 50%',
@@ -140,8 +120,6 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'fade-in-right': 'fade-in-right 0.6s ease-out forwards',
-        'fade-in-left': 'fade-in-left 0.6s ease-out forwards',
         'gradient-shift-slow-float': 'gradient-shift 10s ease infinite, slow-float 6s ease-in-out infinite',
       },
     },

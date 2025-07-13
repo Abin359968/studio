@@ -13,7 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import Observer from "../lib/observer";
+import useParallax from "@/hooks/use-parallax";
 
 const projectsData = [
   {
@@ -54,20 +54,18 @@ const projectsData = [
   },
 ];
 
-const ProjectCard = ({ project, className, index }: { project: (typeof projectsData)[0], className?: string, index: number }) => {
+const ProjectCard = ({ project }: { project: (typeof projectsData)[0] }) => {
   const imageUrl = project.staticImageUrl;
   const isLoading = !imageUrl;
+  const ref = React.useRef<HTMLDivElement>(null);
+  const { y } = useParallax(ref, -10);
 
   return (
-    <Observer
-      animation="fade-in-up"
-      className="h-full"
-      style={{ animationDelay: `${index * 150}ms` }}
-    >
+    <div ref={ref}>
       <Card
+        style={{ y }}
         className={cn(
-          "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 h-full",
-          className
+          "flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-primary/40 hover:shadow-2xl hover:-translate-y-2 h-full"
         )}
       >
         <div className="aspect-video overflow-hidden">
@@ -98,7 +96,7 @@ const ProjectCard = ({ project, className, index }: { project: (typeof projectsD
         <CardFooter>
         </CardFooter>
       </Card>
-    </Observer>
+    </div>
   );
 };
 
@@ -107,8 +105,7 @@ export default function Projects() {
   return (
     <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <Observer
-          animation="fade-in-up"
+        <div
           className="flex flex-col items-center justify-center space-y-4 text-center mb-16"
         >
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
@@ -117,13 +114,12 @@ export default function Projects() {
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             A selection of my work in game and interactive media development.
           </p>
-        </Observer>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projectsData.map((project, index) => (
+          {projectsData.map((project) => (
             <ProjectCard 
               key={project.title} 
               project={project as any} 
-              index={index}
             />
           ))}
         </div>

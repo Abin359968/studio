@@ -1,7 +1,6 @@
 import { Building, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Observer from "@/components/lib/observer";
 
 
 const experiences = [
@@ -25,23 +24,21 @@ export default function Experience() {
   return (
     <section id="experience" className="w-full py-20 md:py-32 bg-background overflow-hidden">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
-        <Observer animation="fade-in-up" className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl font-headline text-primary">
             Work Experience
           </h2>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             My professional journey as a game developer.
           </p>
-        </Observer>
+        </div>
         <div className="relative max-w-3xl mx-auto">
-          <Observer animation="fade-in-up" className="absolute left-6 h-full w-0.5 bg-border/40 top-2" style={{animationDelay: '200ms'}} />
+          <div className="absolute left-6 h-full w-0.5 bg-border/40 top-2" />
           <div className="space-y-12">
             {experiences.map((exp, index) => (
-              <Observer
+              <div
                 key={index}
-                animation="fade-in-up"
                 className="relative flex gap-8"
-                style={{ animationDelay: `${index * 200 + 400}ms` }}
               >
                  <div className="absolute left-0 top-1.5 z-10">
                     <div className="bg-primary rounded-full p-2.5 border-4 border-background">
@@ -66,7 +63,7 @@ export default function Experience() {
                        </CardContent>
                      </Card>
                 </div>
-              </Observer>
+              </div>
             ))}
           </div>
         </div>
