@@ -27,7 +27,7 @@ export default function Hero() {
               ))}
             </span>
           </div>
-          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400 animate-fade-in-up" style={{animationDelay: '400ms'}}>
+          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-primary via-violet-500 to-white bg-[200%_auto] animate-gradient-shift-slow-float" style={{animationDelay: '400ms'}}>
             Game Developer
           </h1>
           <p className="max-w-[700px] text-muted-foreground md:text-xl animate-fade-in-up" style={{animationDelay: '600ms'}}>
