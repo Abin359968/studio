@@ -32,7 +32,7 @@ const generateProjectImageFlow = ai.defineFlow(
     inputSchema: GenerateProjectImageInputSchema,
     outputSchema: GenerateProjectImageOutputSchema,
   },
-  async (input) => {
+  async (input: GenerateProjectImageInput) => {
     const apiKey = process.env.GOOGLE_API_KEY;
     if (!apiKey) {
       console.log('GOOGLE_API_KEY not set, returning placeholder image.');
