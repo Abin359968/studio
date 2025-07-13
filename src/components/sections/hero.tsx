@@ -73,7 +73,12 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.6, type: "spring", stiffness: 100 }}
-            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60"
+            className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent bg-no-repeat animate-fill-text"
+            style={{
+              backgroundSize: '0% 100%',
+              animationDelay: '1s',
+              animationFillMode: 'forwards',
+            }}
           >
             Game Developer
           </motion.h1>
