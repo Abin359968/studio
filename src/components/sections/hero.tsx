@@ -19,7 +19,11 @@ export default function Hero() {
   }, []);
 
   const colors = ["#4B0082", "#9400D3", "#8A2BE2", "#9932CC", "#800080"];
-  const color = useTransform(mouseY, [0, windowHeight], colors);
+  const color = useTransform(
+    mouseY,
+    [0, windowHeight / 4, windowHeight / 2, (windowHeight * 3) / 4, windowHeight],
+    colors
+  );
   
   const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent<HTMLDivElement>) => {
     const { left, top } = currentTarget.getBoundingClientRect();
