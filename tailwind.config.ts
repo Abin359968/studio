@@ -107,20 +107,12 @@ export default {
             'background-position': '100% 50%',
           },
         },
-        'slow-float': {
-          '0%, 100%': {
-            transform: 'translateY(0px)',
-          },
-          '50%': {
-            transform: 'translateY(-10px)',
-          },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'gradient-shift-slow-float': 'gradient-shift 10s ease infinite, slow-float 6s ease-in-out infinite',
+        'gradient-shift': 'gradient-shift 10s ease infinite',
       },
     },
   },
