@@ -89,9 +89,13 @@ export default function About() {
                 className="flex items-start gap-6"
                 variants={itemVariants}
               >
-                <div className="bg-primary/10 p-4 rounded-full">
+                <motion.div 
+                  className="bg-primary/10 p-4 rounded-full"
+                  whileHover={{ scale: 1.1, rotate: 10 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   {stat.icon}
-                </div>
+                </motion.div>
                 <div>
                   {stat.value && (
                     <p className="text-4xl font-bold font-headline">{stat.value}</p>
