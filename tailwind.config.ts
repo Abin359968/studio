@@ -100,10 +100,10 @@ export default {
           },
         },
         'gradient-shift': {
-          '0%, 100%': {
+          '0%': {
             'background-position': '0% 50%',
           },
-          '50%': {
+          '100%': {
             'background-position': '100% 50%',
           },
         },
@@ -112,7 +112,7 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-        'gradient-shift': 'gradient-shift 6s ease infinite',
+        'gradient-shift': 'gradient-shift 6s linear infinite',
       },
     },
   },
