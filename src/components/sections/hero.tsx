@@ -3,24 +3,44 @@ import { Download, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
+  const name = "Abin C.";
   return (
     <section className="relative w-full h-screen min-h-[700px] flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-background -z-20" />
-      <div className="absolute inset-0 -z-10 bg-grid-zinc-700/20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_60%)]" />
-      
+      <div
+        className="absolute inset-0 -z-10 bg-grid-zinc-700/20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_60%)]"
+      />
+
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-6 animate-fade-in-up">
-          <p className="text-lg md:text-xl font-medium text-primary font-headline">
-            Hi, I&apos;m Abin C.
-          </p>
-          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400">
+        <div className="flex flex-col items-center space-y-6">
+          <div className="text-lg md:text-xl font-medium text-primary font-headline animate-fade-in-up">
+            Hi, I&apos;m{" "}
+            <span className="inline-block">
+              {name.split("").map((letter, index) => (
+                <span
+                  key={index}
+                  className="inline-block animate-fade-in-up"
+                  style={{ animationDelay: `${200 + index * 50}ms`, animationFillMode: 'backwards' }}
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </span>
+              ))}
+            </span>
+          </div>
+          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-400 animate-fade-in-up" style={{animationDelay: '400ms'}}>
             Game Developer
           </h1>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl">
-            Crafting immersive and innovative 2D, 3D, AR & VR experiences from concept to reality.
+          <p className="max-w-[700px] text-muted-foreground md:text-xl animate-fade-in-up" style={{animationDelay: '600ms'}}>
+            Crafting immersive and innovative 2D, 3D, AR & VR experiences from
+            concept to reality.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-6 animate-fade-in-up animation-delay-200">
-            <Button asChild size="lg" variant="default" className="shadow-lg shadow-primary/30">
+          <div className="flex flex-col sm:flex-row gap-4 pt-6 animate-fade-in-up" style={{animationDelay: '800ms'}}>
+            <Button
+              asChild
+              size="lg"
+              variant="default"
+              className="shadow-lg shadow-primary/30"
+            >
               <Link href="#projects">
                 View My Work <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
