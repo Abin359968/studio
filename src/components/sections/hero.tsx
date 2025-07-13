@@ -1,37 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Download, ArrowRight, Mouse } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { motion, useMotionTemplate, useMotionValue, useTransform } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import React from "react";
 
 export default function Hero() {
   const name = "Abin C.";
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const [windowHeight, setWindowHeight] = useState(0);
 
-  useEffect(() => {
-    // This code now only runs on the client
-    setWindowHeight(window.innerHeight);
-  }, []);
-
-  const colors = ["#4B0082", "#9400D3", "#8A2BE2", "#9932CC", "#800080"];
-  const color = useTransform(
-    mouseY,
-    [0, windowHeight / 4, windowHeight / 2, (windowHeight * 3) / 4, windowHeight],
-    colors
-  );
-  
   const handleMouseMove = ({ clientX, clientY, currentTarget }: React.MouseEvent<HTMLDivElement>) => {
+    if (!currentTarget) return;
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   };
   
-  const background = useMotionTemplate`radial-gradient(circle at ${mouseX}px ${mouseY}px, ${color} 0%, transparent 50%)`;
+  const background = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, hsl(var(--primary) / 0.15), transparent 80%)`;
 
   return (
     <motion.section 
@@ -50,15 +38,7 @@ export default function Hero() {
         className="absolute inset-0 z-0 pointer-events-none"
         style={{ background }}
       />
-      <motion.div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          filter: "blur(100px)",
-          background,
-        }}
-      />
-
-
+      
       <div className="container px-4 md:px-6 z-10">
         <div className="flex flex-col items-center space-y-6">
           <motion.div 
