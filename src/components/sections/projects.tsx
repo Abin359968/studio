@@ -10,11 +10,8 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ExternalLink, Bot } from "lucide-react";
-import Link from "next/link";
-import { generateProjectImage } from "@/ai/flows/generate-project-image-flow";
+import { Bot } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
@@ -58,28 +55,8 @@ const projectsData = [
 ];
 
 const ProjectCard = ({ project, className, index }: { project: (typeof projectsData)[0], className?: string, index: number }) => {
-  const [imageUrl, setImageUrl] = React.useState<string | null>(project.staticImageUrl || null);
-  const [isLoading, setIsLoading] = React.useState(!project.staticImageUrl);
-  const isStatic = !!project.staticImageUrl;
-
-  React.useEffect(() => {
-    if (project.staticImageUrl) return;
-
-    const fetchImage = async () => {
-      try {
-        setIsLoading(true);
-        const result = await generateProjectImage({ description: project.description });
-        const placeholderUrl = `https://placehold.co/600x400.png`;
-        setImageUrl(result.imageUrl || placeholderUrl);
-      } catch (error) {
-        console.error("Failed to generate image:", error);
-        setImageUrl("https://placehold.co/600x400.png");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchImage();
-  }, [project.description, project.staticImageUrl]);
+  const imageUrl = project.staticImageUrl;
+  const isLoading = !imageUrl;
 
   return (
     <Card
@@ -115,16 +92,6 @@ const ProjectCard = ({ project, className, index }: { project: (typeof projectsD
         </div>
       </CardContent>
       <CardFooter>
-        <div className="flex justify-between w-full items-center">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-               {!isStatic && (
-                 <>
-                    <Bot className="h-4 w-4 text-primary" />
-                    <span>AI Generated Image</span>
-                 </>
-               )}
-            </div>
-        </div>
       </CardFooter>
     </Card>
   );
