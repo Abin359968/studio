@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative w-full h-screen min-h-[700px] flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-background -z-20" />
       <div
-        className="absolute inset-0 -z-10 bg-grid-zinc-700/20 [mask-image:radial-gradient(ellipse_at_center,white,transparent_60%)]"
+        className="absolute inset-0 -z-10 bg-grid-primary/10 [mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]"
       />
 
       <div className="container px-4 md:px-6">
@@ -27,7 +27,7 @@ export default function Hero() {
               ))}
             </span>
           </div>
-          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-primary via-violet-500 to-white bg-[200%_auto] animate-gradient-shift-slow-float" style={{animationDelay: '400ms'}}>
+          <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl font-headline bg-clip-text text-transparent bg-gradient-to-br from-primary via-accent to-white bg-[200%_auto] animate-gradient-shift-slow-float" style={{animationDelay: '400ms'}}>
             Game Developer
           </h1>
           <p className="max-w-[700px] text-muted-foreground md:text-xl animate-fade-in-up" style={{animationDelay: '600ms'}}>
